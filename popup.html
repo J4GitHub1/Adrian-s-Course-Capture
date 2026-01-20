@@ -1,0 +1,214 @@
+<!--
+  Copyright (C) 2025 Adrian Brozek
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 220px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 12px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    .header img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .header-text {
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+      position: relative;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-record {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .btn-record:hover {
+      background: linear-gradient(135deg, #ff5c4d, #e74c3c);
+    }
+
+    .btn-record.recording {
+      background: linear-gradient(135deg, #27ae60, #1e8449);
+    }
+
+    .btn-record.recording:hover {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+    }
+
+    .btn-info {
+      background: #2a2a4a;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .btn-info:hover {
+      background: #3a3a5a;
+      color: #fff;
+    }
+
+    .record-dot {
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .btn-record.recording .record-dot {
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      z-index: 100;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #333;
+    }
+
+    .btn:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .tooltip-info {
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .tooltip-info .title {
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .tooltip-info .version {
+      color: #aaa;
+    }
+
+    .tooltip-info .license {
+      color: #888;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    .keybind {
+      background: #444;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="icons/icon-48.png" alt="ACC">
+    <span class="header-text">Course Capture</span>
+  </div>
+
+  <button id="recordBtn" class="btn btn-record">
+    <span class="record-dot"></span>
+    <span id="recordText">Start Recording</span>
+    <div class="tooltip">
+      <span class="keybind" id="keybindText">Ctrl+Shift+L</span>
+    </div>
+  </button>
+
+  <button class="btn btn-info">
+    Info
+    <div class="tooltip tooltip-info">
+      <div class="title">Adrian's Course Capture</div>
+      <div class="version">v1.1.0</div>
+      <div class="license">GNU GPL v3</div>
+    </div>
+  </button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

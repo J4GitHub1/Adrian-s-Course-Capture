@@ -1,0 +1,48 @@
+
+
+{
+  "manifest_version": 2,
+  "name": "Adrian's Course Capture",
+  "version": "1.1.0",
+  "description": "Capture and save text content from web pages while browsing. Perfect for taking notes from online courses, documentation, and articles.",
+  "license": "GPL-3.0-or-later",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "downloads"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle-capture": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Start/Stop course capture"
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    },
+    "default_title": "Adrian's Course Capture",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  }
+}
